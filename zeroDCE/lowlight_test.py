@@ -30,7 +30,7 @@ def lowlight(data_lowlight):
     enhanced_image, params_maps = DCE_net(data_lowlight)
 
     # path = './zero_enhanced_images/'
-    image = torchvision.utils.make_grid(enhanced_image).mul(255).add_(0.5).clamp_(0, 255).permute(1, 2, 0).numpy()
+    image = torchvision.utils.make_grid(enhanced_image).mul(255).add_(0.5).clamp_(0, 255).permute(1, 2, 0).to("cpu", torch.uint8).numpy()
     # torchvision.utils.save_image(enhanced_image, path)
 
     return image

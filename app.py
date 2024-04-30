@@ -35,7 +35,7 @@ from IATenhance.img_demo import exposure
 st.set_page_config(layout="wide")
 
 # st.header("Custom tab component for on-hover navigation bar")
-st.markdown('<style>' + open('style.css').read() + '</style>', unsafe_allow_html=True)
+st.markdown('<style>' + open('./style.css').read() + '</style>', unsafe_allow_html=True)
 
 with st.sidebar:
     tabs = on_hover_tabs(tabName=['图像增强', '车道线检测', '信号灯检测'],
@@ -217,7 +217,7 @@ elif tabs == '信号灯检测':
                     image = np.asarray(image)
                     model = load_model("./models/best.pt")
                     with st.spinner("Running..."):
-                        res = model.track(image, conf=confidence)
+                        res = model.predict(image, conf=confidence)
                         col1.image(res[0].plot(), use_column_width=True)
             elif source == 'Video':
                 if not source_video:
@@ -233,7 +233,7 @@ elif tabs == '信号灯检测':
                             while vid_cap.isOpened():
                                 success, image = vid_cap.read()
                                 if success:
-                                    res = model.track(image, conf=confidence)
+                                    res = model.predict(image, conf=confidence)
                                     st_frame.image(res[0].plot(), use_column_width=True, caption='Detected Video', channels="BGR")
                                 else:
                                     vid_cap.release()

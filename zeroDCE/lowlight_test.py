@@ -23,7 +23,7 @@ def lowlight(data_lowlight):
     w = (data_lowlight.shape[1] // scale_factor) * scale_factor
     data_lowlight = data_lowlight[0:h, 0:w, :]
     data_lowlight = data_lowlight.permute(2, 0, 1)
-    data_lowlight = data_lowlight.cuda().unsqueeze(0)
+    data_lowlight = data_lowlight.unsqueeze(0)
 
     DCE_net = model.enhance_net_nopool(scale_factor)
     DCE_net.load_state_dict(torch.load('zeroDCE/Epoch99.pth', map_location=torch.device('cpu')))

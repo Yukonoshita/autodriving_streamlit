@@ -12,7 +12,7 @@ parser.add_argument("--isTest", type=bool, default=True, help="Test or not")
 parser.add_argument('--dataset', type=str, default='SOTS', help='Path of the validation dataset')
 parser.add_argument("--checkpoint", default="msbdn/model/model.pt", type=str,
                     help="Test on intermediate pkl (default: none)")
-parser.add_argument('--gpu_ids', type=str, default='0', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
+parser.add_argument('--gpu_ids', type=str, default='-1', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
 parser.add_argument('--name', type=str, default='MSBDN', help='filename of the training models')
 parser.add_argument("--start", type=int, default=2, help="Activated gate module")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

@@ -23,7 +23,7 @@ def create_generator(opt):
         print('Generator is created!')
     else:
         # Load a pre-trained network
-        pretrained_net = torch.load(opt.load_name)
+        pretrained_net = torch.load(opt.load_name, map_location=torch.device('cpu'))
         load_dict(generator, pretrained_net)
         print('Generator is loaded!')
     return generator

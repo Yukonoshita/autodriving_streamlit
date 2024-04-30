@@ -23,9 +23,9 @@ normalize_process = Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
 ## Load Pre-train Weights
 model = IAT()
 if config.task == 'exposure':
-    model.load_state_dict(torch.load(exposure_pretrain))
+    model.load_state_dict(torch.load(exposure_pretrain, map_location=torch.device('cpu')))
 elif config.task == 'enhance':
-    model.load_state_dict(torch.load(enhance_pretrain))
+    model.load_state_dict(torch.load(enhance_pretrain, map_location=torch.device('cpu')))
 else:
     warnings.warn('Only could be exposure or enhance')
 model.eval()

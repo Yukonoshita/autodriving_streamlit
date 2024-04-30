@@ -18,7 +18,7 @@ parser.add_argument("--start", type=int, default=2, help="Activated gate module"
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 opt = parser.parse_args()
-device = torch.device('cuda:{}'.format(opt.gpu_ids[0])) if torch.cuda.is_available() else torch.device('cpu')
+device = torch.device('cpu')
 str_ids = opt.gpu_ids.split(',')
 torch.cuda.set_device(int(str_ids[0]))
 

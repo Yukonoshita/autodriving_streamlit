@@ -53,7 +53,7 @@ parser.add_argument('--mu', type=int, default=0, help='Gaussian noise mean')
 parser.add_argument('--sigma', type=int, default=30, help='Gaussian noise variance: 30 | 50 | 70')
 opt = parser.parse_args()
 
-generator = utils.create_generator(opt).cuda()
+generator = utils.create_generator(opt)
 
 
 def derain(img_rainy):
@@ -75,7 +75,7 @@ def derain(img_rainy):
     img_rainy = img_rainy / 255.0
     img_rainy = torch.from_numpy(img_rainy.transpose(2, 0, 1)).contiguous()
     img_rainy = img_rainy.unsqueeze(0)
-    img_rainy = img_rainy.cuda()
+    img_rainy = img_rainy
 
     with torch.no_grad():
         img = generator(img_rainy, img_rainy)

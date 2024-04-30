@@ -25,12 +25,12 @@ def lowlight(data_lowlight):
     data_lowlight = data_lowlight.permute(2, 0, 1)
     data_lowlight = data_lowlight.cuda().unsqueeze(0)
 
-    DCE_net = model.enhance_net_nopool(scale_factor).cuda()
-    DCE_net.load_state_dict(torch.load('zeroDCE/Epoch99.pth'))
+    DCE_net = model.enhance_net_nopool(scale_factor)
+    DCE_net.load_state_dict(torch.load('zeroDCE/Epoch99.pth', map_location=torch.device('cpu')))
     enhanced_image, params_maps = DCE_net(data_lowlight)
 
     # path = './zero_enhanced_images/'
-    image = torchvision.utils.make_grid(enhanced_image).mul(255).add_(0.5).clamp_(0, 255).permute(1, 2, 0).to("cpu", torch.uint8).numpy()
+    image = torchvision.utils.make_grid(enhanced_image).mul(255).add_(0.5).clamp_(0, 255).permute(1, 2, 0).numpy()
     # torchvision.utils.save_image(enhanced_image, path)
 
     return image

@@ -21,7 +21,7 @@ enhance_pretrain = r'best_Epoch_lol_v1.pth'
 normalize_process = Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
 
 ## Load Pre-train Weights
-model = IAT().cuda()
+model = IAT()
 if config.task == 'exposure':
     model.load_state_dict(torch.load(exposure_pretrain))
 elif config.task == 'enhance':
@@ -35,7 +35,7 @@ def exposure(img):
     img = (np.asarray(img) / 255.0)
     if img.shape[2] == 4:
         img = img[:, :, :3]
-    input = torch.from_numpy(img).float().cuda()
+    input = torch.from_numpy(img).float()
     input = input.permute(2, 0, 1).unsqueeze(0)
     if config.normalize:  # False
         input = normalize_process(input)
@@ -43,4 +43,4 @@ def exposure(img):
     ## Forward Network
     _, _, enhanced_img = model(input)
 
-    return transforms.ToPILImage()(enhanced_img.cpu()[0])
+    return transforms.ToPILImage()(enhanced_img[0])
